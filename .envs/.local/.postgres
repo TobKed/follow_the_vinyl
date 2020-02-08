@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=follow_the_vinyl
+POSTGRES_USER=HclTiIfbNhMnAZbfvIqlXxqBnlcIEbXb
+POSTGRES_PASSWORD=PPRoRGDzGorX1G4VCyOOyszUlQmPEJwSOcg2KlkmZbVHx0Zc9XkcnFERk16FlUe2

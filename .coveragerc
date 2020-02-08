@@ -1,0 +1,5 @@
+[run]
+include = follow_the_vinyl/*
+omit = *migrations*, *tests*
+plugins =
+    django_coverage_plugin
