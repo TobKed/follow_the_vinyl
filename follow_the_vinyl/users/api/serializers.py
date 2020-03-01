@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from follow_the_vinyl.users.models import User
 
 

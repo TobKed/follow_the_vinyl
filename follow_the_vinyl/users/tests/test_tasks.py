@@ -1,7 +1,6 @@
 import pytest
 from celery.result import EagerResult
 
-
 from follow_the_vinyl.users.tasks import get_users_count
 from follow_the_vinyl.users.tests.factories import UserFactory
 

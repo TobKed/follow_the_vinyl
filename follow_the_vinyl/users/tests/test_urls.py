@@ -1,5 +1,5 @@
 import pytest
-from django.urls import reverse, resolve
+from django.urls import resolve, reverse
 
 from follow_the_vinyl.users.models import User
 
