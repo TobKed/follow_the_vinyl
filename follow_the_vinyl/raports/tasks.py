@@ -7,8 +7,8 @@ app = Celery()
 
 
 @app.task
-def send_raport(raport_pk: int) -> None:
-    raport = Raport.objects.get(pk=raport_pk)
+def send_raport(raport_id: int) -> None:
+    raport = Raport.objects.get(id=raport_id)
     raport.send_raport()
 
 
@@ -20,7 +20,6 @@ def clean_orphan_raport_tasks() -> None:
         # session.query(PeriodicTask).filter(raport=None).delete()
         # session.commit()
         print(session.query(PeriodicTask).filter(raport=None).all())
-
 
 
 @app.on_after_configure.connect

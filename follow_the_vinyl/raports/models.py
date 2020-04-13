@@ -1,16 +1,11 @@
-from datetime import datetime
-
 import timezone_field
-from celery import schedules
 from django.conf import settings
 from django.contrib.postgres.fields import JSONField
-from django.core.exceptions import MultipleObjectsReturned
 from django.core.mail import send_mail
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_celery_beat import validators as celery_beat_validators
 from django_celery_beat.models import CrontabSchedule, PeriodicTask, cronexp
-from django_celery_beat.tzcrontab import TzAwareCrontab
 
 from . import validators
 
@@ -121,7 +116,7 @@ class SnapShot(models.Model):
 class Raport(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     users = models.ManyToManyField(DiscogsUser)
-    schedule = models.ForeignKey(OnlyDayAndHourSchedule, on_delete=models.CASCADE)
+    schedule = models.OneToOneField(OnlyDayAndHourSchedule, on_delete=models.CASCADE)
     crontab_schedule = models.ForeignKey(
         CrontabSchedule, blank=True, null=True, on_delete=models.SET_NULL
     )
@@ -149,17 +144,4 @@ class Raport(models.Model):
             month_of_year=self.schedule.month_of_year,
             timezone=self.schedule.timezone,
         )
-
-        # FIXME: shall be moved to post_save
-        if self.periodic_task:
-            self.periodic_task.crontab = self.crontab_schedule
-            self.periodic_task.save()
-        else:
-            self.periodic_task = PeriodicTask.objects.create(
-                crontab=self.crontab_schedule,
-                name=f"Raport(id={self.pk}).periodic_task",
-                task="follow_the_vinyl.raports.tasks.send_raport",
-                kwargs={"raport_pk": self.pk},
-            )
-
         super().save(*args, **kwargs)

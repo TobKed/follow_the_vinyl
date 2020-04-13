@@ -7,4 +7,4 @@ class RaportsConfig(AppConfig):
     verbose_name = _("Raports")
 
     def ready(self):
-        from . import signals  # noqa
+        import follow_the_vinyl.raports.signals  # noqa
