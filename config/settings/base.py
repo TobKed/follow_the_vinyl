@@ -76,6 +76,8 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "follow_the_vinyl.users.apps.UsersConfig",
     # Your stuff: custom apps go here
+    # "follow_the_vinyl.raports.apps.RaportsConfig",
+    "follow_the_vinyl.raports.apps.RaportsConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
